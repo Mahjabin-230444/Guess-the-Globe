@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Neon GeoGuess Game</title>
+
+  <!-- Leaflet CSS -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- Loading Screen -->
+  <div id="loadingScreen" class="loading-screen">
+    <div class="loader-ring"></div>
+    <h2>Loading Geo Arena...</h2>
+    <p>Preparing the world map</p>
+  </div>
+
+  <!-- Confetti Canvas -->
+  <canvas id="confettiCanvas"></canvas>
+
+  <!-- Main App -->
+  <main class="app">
+
+    <!-- Map -->
+    <div id="map"></div>
+
+    <!-- Top HUD -->
+    <section id="gameHud" class="game-hud hidden">
+      <div class="hud-card target-card">
+        <span class="hud-label">🌍 Find This Place</span>
+        <h1 id="targetPlace">Mystery Location</h1>
+      </div>
+
+      <div class="hud-card stats-card">
+        <div class="stat">
+          <span>Round</span>
+          <strong id="roundDisplay">1 / 5</strong>
+        </div>
+
+        <div class="stat">
+          <span>Score</span>
+          <strong id="scoreDisplay">0</strong>
+        </div>
+
+        <div class="stat">
+          <span>Timer</span>
+          <strong id="timerDisplay">30s</strong>
+        </div>
+      </div>
+
+      <button id="restartTopBtn" class="neon-btn secondary">↻ Restart</button>
+    </section>
+
+    <!-- Start Screen -->
+    <section id="startScreen" class="screen-overlay">
+      <div class="glass-card start-card">
+        <div class="game-logo">🧭</div>
+
+        <h2>Neon GeoGuess</h2>
+
+        <p>
+          Guess famous locations around the world. Click on the map, reveal the
+          real place, and earn points based on accuracy.
+        </p>
+
+        <div class="form-group">
+          <label for="difficultySelect">Difficulty Level</label>
+          <select id="difficultySelect">
+            <option value="easy">Easy — 45 seconds</option>
+            <option value="medium" selected>Medium — 30 seconds</option>
+            <option value="hard">Hard — 18 seconds</option>
+          </select>
+        </div>
+
+        <div class="feature-grid">
+          <div>📍<span>Click to Guess</span></div>
+          <div>⚡<span>Neon Scoring</span></div>
+          <div>🏆<span>Leaderboard</span></div>
+        </div>
+
+        <button id="playBtn" class="neon-btn">▶ Play Game</button>
+      </div>
+    </section>
+
+    <!-- Result Panel -->
+    <section id="resultPanel" class="result-panel hidden">
+      <div class="result-header">
+        <div>
+          <h3 id="resultTitle">Round Result</h3>
+          <p id="resultDescription">Your result will appear here.</p>
+        </div>
+
+        <div id="roundScoreBadge" class="score-badge">+0</div>
+      </div>
+
+      <div class="result-grid">
+        <div>
+          <span>Actual Place</span>
+          <strong id="actualPlaceText">—</strong>
+        </div>
+
+        <div>
+          <span>Distance</span>
+          <strong id="distanceText">—</strong>
+        </div>
+
+        <div>
+          <span>Accuracy</span>
+          <strong id="accuracyText">—</strong>
+        </div>
+      </div>
+
+      <button id="nextRoundBtn" class="neon-btn">Next Round ➜</button>
+    </section>
+
+    <!-- Final Screen -->
+    <section id="finalScreen" class="screen-overlay hidden">
+      <div class="glass-card final-card">
+        <div class="game-logo">🏁</div>
+
+        <h2>Game Complete</h2>
+
+        <p id="finalMessage">Great job! Your final score is below.</p>
+
+        <div class="final-score-box">
+          <span id="finalScoreText">0</span>
+          <small>out of 5000</small>
+        </div>
+
+        <div class="leaderboard-box">
+          <h3>🏆 Local Leaderboard</h3>
+          <ol id="leaderboardList"></ol>
+        </div>
+
+        <button id="restartFinalBtn" class="neon-btn">🔁 Play Again</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- Custom JS -->
+  <script src="script.js"></script>
+</body>
+</html>
